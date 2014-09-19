@@ -6,12 +6,15 @@ import flixel.util.FlxRandom;
 
 class Grub extends FlxSprite {
 
-    var _speed = 500;
-    var _angle = -45;
+    var _speed:Int;
+    var _angle:Int;
 
     public function new(startX:Float=0, startY:Float=0):Void {
 
         super(startX, startY);
+
+        this._speed = 500;
+        this._angle = -45 - FlxRandom.intRanged(0, 20);
 
         this.loadGraphic(AssetPaths.grub__png, false, 32, 32);
         this.setGraphicSize(16, 16);
