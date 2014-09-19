@@ -69,7 +69,8 @@ class PlayState extends FlxState {
 
     function grubOverBall(grub:Grub, ball:Ball):Void {
     
-        trace('grub over ball');
+        // trace('grub over ball');
+        this._ball.ballTween.active = true;
     
     }
 
