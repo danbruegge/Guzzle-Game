@@ -18,6 +18,7 @@ class Grub extends FlxSprite {
 
         this.loadGraphic(AssetPaths.grub__png, false, 32, 32);
         this.setGraphicSize(16, 16);
+        this.updateHitbox();
 
         this.elasticity = 1;
         this.drag.x = this.drag.y = 1600;
