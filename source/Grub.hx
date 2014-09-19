@@ -39,7 +39,7 @@ class Grub extends FlxSprite {
         
             case 'top':
                 if (this._angle > -90) {
-                    this._angle = 45 + range;
+                    this._angle = 45 - range;
                 } else {
                     this._angle = 135 + range;
                 }
@@ -53,16 +53,16 @@ class Grub extends FlxSprite {
 
             case 'left':
                 if (this._angle < 0) {
-                    this._angle = -45 - range;
+                    this._angle = -45 + range;
                 } else {
-                    this._angle = 45 + range;
+                    this._angle = 45 - range;
                 }
  
             case 'right':
                 if (this._angle < 0) {
                     this._angle = -135 - range;
                 } else {
-                    this._angle = 135 + range;
+                    this._angle = 135 - range;
                 }
 
         }
