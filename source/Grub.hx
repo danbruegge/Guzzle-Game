@@ -14,7 +14,7 @@ class Grub extends FlxSprite {
         super(startX, startY);
 
         this._speed = 500;
-        this._angle = -45 - FlxRandom.intRanged(0, 20);
+        this._angle = FlxRandom.intRanged(-179, 180);
 
         this.loadGraphic(AssetPaths.grub__png, false, 32, 32);
         this.setGraphicSize(16, 16);

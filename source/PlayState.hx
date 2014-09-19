@@ -1,5 +1,6 @@
 package;
 
+import Std;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -7,6 +8,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.util.FlxRandom;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -25,7 +27,16 @@ class PlayState extends FlxState {
         this._ball = new Ball();
         this._ball.screenCenter();
 
-        this._grub = new Grub(32, 32);
+        this._grub = new Grub(
+            FlxRandom.intRanged(
+                Std.int(FlxG.width * 0.1),
+                Std.int(FlxG.width * 0.9)
+            ),
+            FlxRandom.intRanged(
+                Std.int(FlxG.height * 0.1),
+                Std.int(FlxG.height * 0.9)
+            )
+        );
 
         this.add(this._walls);
         this.add(this._ball);
