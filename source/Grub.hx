@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.util.FlxAngle;
+import flixel.util.FlxRandom;
 
 class Grub extends FlxSprite {
 
@@ -30,41 +31,38 @@ class Grub extends FlxSprite {
 
     public function changeMovement(wallPos:String):Void {
     
+        var range = FlxRandom.intRanged(0, 20);
         switch(wallPos) {
         
             case 'top':
                 if (this._angle > -90) {
-                    this._angle = 45;
+                    this._angle = 45 + range;
                 } else {
-                    this._angle = 135;
+                    this._angle = 135 + range;
                 }
-                // this._angle = 90; // to bottom
 
             case 'bottom': 
                 if (this._angle < 90) {
-                    this._angle = -45;
+                    this._angle = -45 - range;
                 } else {
-                    this._angle = -135;
+                    this._angle = -135 - range;
                 }
-                // this._angle = -90; // to top
 
             case 'left':
                 if (this._angle < 0) {
-                    this._angle = -45;
+                    this._angle = -45 - range;
                 } else {
-                    this._angle = 45;
+                    this._angle = 45 + range;
                 }
-                // this._angle = 0; // to right
  
             case 'right':
                 if (this._angle < 0) {
-                    this._angle = -135;
+                    this._angle = -135 - range;
                 } else {
-                    this._angle = 135;
+                    this._angle = 135 + range;
                 }
-                // this._angle = 180; // to left
 
-        };
+        }
     
     }
 
