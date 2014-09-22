@@ -5,9 +5,6 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.util.FlxMath;
 import flixel.util.FlxRandom;
 
 using flixel.util.FlxSpriteUtil;
@@ -70,7 +67,6 @@ class PlayState extends FlxState {
     function grubOverBall(grub:Grub, ball:Ball):Void {
     
         // trace('grub over ball');
-        this._ball.ballTween.active = true;
     
     }
 
