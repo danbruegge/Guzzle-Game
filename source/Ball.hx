@@ -1,15 +1,25 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.util.FlxAngle;
+import flixel.util.FlxRandom;
 
 class Ball extends FlxSprite {
 
-    override public function new(startX:Float=0, startY:Float=0):Void {
+    public var speed = 400;
 
-        super(startX, startY);
+    var _angle:Int;
 
-        this.loadGraphic(AssetPaths.ball__png, false, 32, 32);
-        this.immovable = true;
+    public function new(x:Float=0, y:Float=0):Void {
+
+        super(x, y);
+
+        this._angle = FlxRandom.intRanged(-179, 180);
+
+        this.loadGraphic(AssetPaths.balls__png, true, 32, 32);
+
+        this.elasticity = 1;
+        this.drag.x = this.drag.y = 1600;
 
     }
 
@@ -17,6 +27,49 @@ class Ball extends FlxSprite {
     
         super.update();
 
+        FlxAngle.rotatePoint(this.speed, 0, 0, 0, this._angle, this.velocity); 
+
+    }
+
+    public function changeMovement(wallPos:String):Void {
+    
+        var angl = this._angle;
+        var range = FlxRandom.intRanged(0, 20);
+
+        switch(wallPos) {
+        
+            case 'top':
+                if (angl > -90) {
+                    angl = 45 - range;
+                } else {
+                    angl = 135 + range;
+                }
+
+            case 'bottom': 
+                if (angl < 90) {
+                    angl = -45 - range;
+                } else {
+                    angl = -135 - range;
+                }
+
+            case 'left':
+                if (angl < 0) {
+                    angl = -45 + range;
+                } else {
+                    angl = 45 - range;
+                }
+ 
+            case 'right':
+                if (angl < 0) {
+                    angl = -135 - range;
+                } else {
+                    angl = 135 - range;
+                }
+
+        }
+
+        this._angle = angl;
+    
     }
 
 }

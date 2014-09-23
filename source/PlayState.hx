@@ -11,8 +11,8 @@ using flixel.util.FlxSpriteUtil;
 
 class PlayState extends FlxState {
 
-    var _ball:Ball;
-    var _grub:Grub;
+    var _player:Player;
+    var _enemy:BallEnemy;
     var _walls:Walls;
 
     override public function create():Void {
@@ -21,10 +21,10 @@ class PlayState extends FlxState {
 
         this._walls = new Walls();
 
-        this._ball = new Ball();
-        this._ball.screenCenter();
+        this._player = new Player();
+        this._player.screenCenter();
 
-        this._grub = new Grub(
+        this._enemy = new BallEnemy(
             FlxRandom.intRanged(
                 Std.int(FlxG.width * 0.1),
                 Std.int(FlxG.width * 0.9)
@@ -36,8 +36,8 @@ class PlayState extends FlxState {
         );
 
         this.add(this._walls);
-        this.add(this._ball);
-        this.add(this._grub);
+        this.add(this._player);
+        this.add(this._enemy);
 
     }
     
@@ -51,23 +51,15 @@ class PlayState extends FlxState {
 
         super.update();
 
-        FlxG.collide(this._grub, this._walls, this.grubHitWall);
-        if (FlxG.pixelPerfectOverlap(this._grub, this._ball)) {
-            this.grubOverBall(this._grub, this._ball);
-        }
+        FlxG.collide(this._enemy, this._walls, this._enemyHitWall);
+        this._player.checkOverlap(this._enemy);
 
     }
 
-    function grubHitWall(grub:Grub, wall:FlxObject):Void {
+    function _enemyHitWall(enemy:BallEnemy, wall:FlxObject):Void {
     
-        grub.changeMovement(this._walls.positions[wall.ID]);
+        enemy.changeMovement(this._walls.positions[wall.ID]);
 
-    }
-
-    function grubOverBall(grub:Grub, ball:Ball):Void {
-    
-        // trace('grub over ball');
-    
     }
 
 }
