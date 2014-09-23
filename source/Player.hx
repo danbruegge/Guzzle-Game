@@ -17,6 +17,8 @@ class Player extends FlxSprite {
 
         this.loadGraphic(AssetPaths.player__png, false, 32, 32);
         this.immovable = true;
+        this.animation.add('normal', [0, 1, 2, 3], 15);
+        this.animation.add('active', [4, 5, 6, 7], 15);
 
     }
 
@@ -26,12 +28,11 @@ class Player extends FlxSprite {
 
         if (this.isOverlapped) {
         
-            this.animation.frameIndex = 1;
-            FlxG.camera.shake(0.01, 0.06);
+            this.animation.play('active');
         
         } else {
         
-            this.animation.frameIndex = 0;
+            this.animation.play('normal');
         
         }
 
