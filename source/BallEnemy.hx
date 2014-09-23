@@ -14,23 +14,23 @@ class BallEnemy extends Ball {
 
     public function onOverlapClick():Void {
     
+        this.updateSpeed(50);
         this.setGraphicSize(
             Std.int(this.width) - this._growthRate,
             Std.int(this.height) - this._growthRate
         );
         this.updateHitbox();
-        this.speed += 50;
     
     }
 
     public function noOverlapClick():Void {
     
+        this.updateSpeed(-50);
         this.setGraphicSize(
             Std.int(this.width) + this._growthRate,
             Std.int(this.height) + this._growthRate
         );
         this.updateHitbox();
-        this.speed -= 50;
     
     }
 

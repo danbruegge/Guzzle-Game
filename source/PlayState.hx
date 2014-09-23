@@ -51,14 +51,8 @@ class PlayState extends FlxState {
 
         super.update();
 
-        FlxG.collide(this._enemy, this._walls, this._enemyHitWall);
+        FlxG.collide(this._enemy, this._walls);
         this._player.checkOverlap(this._enemy);
-
-    }
-
-    function _enemyHitWall(enemy:BallEnemy, wall:FlxObject):Void {
-    
-        enemy.changeMovement(this._walls.positions[wall.ID]);
 
     }
 

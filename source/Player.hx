@@ -24,6 +24,17 @@ class Player extends FlxSprite {
     
         super.update();
 
+        if (this.isOverlapped) {
+        
+            this.animation.frameIndex = 1;
+            FlxG.camera.shake(0.01, 0.06);
+        
+        } else {
+        
+            this.animation.frameIndex = 0;
+        
+        }
+
     }
 
     public function checkOverlap(enemy:BallEnemy):Void {
@@ -36,26 +47,25 @@ class Player extends FlxSprite {
 
             }
 
-            if (FlxG.mouse.justReleased) {
-            // if (FlxG.mouse.justReleased || FlxG.touches.justReleased) {
-
-                if (this.isOverlapped) {
-            
-                    this.onOverlapClick();
-                    enemy.onOverlapClick();
-
-                } else {
-
-                    this.noOverlapClick();
-                    enemy.noOverlapClick();
-
-                }
-
-            }
-        
         } else {
 
             this.isOverlapped = false;
+
+        }
+
+        if (FlxG.mouse.justReleased) {
+
+            if (this.isOverlapped) {
+
+                this.onOverlapClick();
+                enemy.onOverlapClick();
+
+            } else {
+
+                this.noOverlapClick();
+                enemy.noOverlapClick();
+
+            }
 
         }
 

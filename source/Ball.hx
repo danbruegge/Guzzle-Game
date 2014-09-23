@@ -1,25 +1,20 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.util.FlxAngle;
 import flixel.util.FlxRandom;
 
 class Ball extends FlxSprite {
 
     public var speed = 400;
 
-    var _angle:Int;
-
     public function new(x:Float=0, y:Float=0):Void {
 
         super(x, y);
 
-        this._angle = FlxRandom.intRanged(-179, 180);
-
         this.loadGraphic(AssetPaths.balls__png, true, 32, 32);
 
         this.elasticity = 1;
-        this.drag.x = this.drag.y = 1600;
+        this.velocity.set(this.speed, this.speed);
 
     }
 
@@ -27,48 +22,34 @@ class Ball extends FlxSprite {
     
         super.update();
 
-        FlxAngle.rotatePoint(this.speed, 0, 0, 0, this._angle, this.velocity); 
-
     }
 
-    public function changeMovement(wallPos:String):Void {
+    public function updateSpeed(speed:Int=0):Void {
     
-        var angl = this._angle;
-        var range = FlxRandom.intRanged(0, 20);
+        var x = this.velocity.x;
+        var y = this.velocity.y;
 
-        switch(wallPos) {
+        if (x >= 0) {
+            
+            x += speed;
+
+        } else {
         
-            case 'top':
-                if (angl > -90) {
-                    angl = 45 - range;
-                } else {
-                    angl = 135 + range;
-                }
+            x -= speed;
+        
+        }
+        
+        if (y >= 0) {
+        
+            y += speed;
 
-            case 'bottom': 
-                if (angl < 90) {
-                    angl = -45 - range;
-                } else {
-                    angl = -135 - range;
-                }
-
-            case 'left':
-                if (angl < 0) {
-                    angl = -45 + range;
-                } else {
-                    angl = 45 - range;
-                }
- 
-            case 'right':
-                if (angl < 0) {
-                    angl = -135 - range;
-                } else {
-                    angl = 135 - range;
-                }
-
+        } else {
+        
+            y -= speed;
+        
         }
 
-        this._angle = angl;
+        this.velocity.set(x, y);
     
     }
 

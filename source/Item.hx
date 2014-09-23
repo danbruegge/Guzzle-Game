@@ -9,7 +9,7 @@ class Item extends Ball {
         this.animation.frameIndex = 1;
 
         this.setGraphicSize(16, 16);
-        this.
+        this.updateHitbox();
 
     }
 
