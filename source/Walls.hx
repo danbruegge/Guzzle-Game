@@ -22,7 +22,6 @@ class Walls extends FlxTypedGroup<FlxSprite> {
 
         super();
 
-
         this.positions = ['top', 'bottom', 'left', 'right'];
 
         this._topWall = new FlxSprite(0, 0);

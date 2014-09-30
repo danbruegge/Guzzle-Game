@@ -7,6 +7,7 @@ using flixel.util.FlxSpriteUtil;
 
 class Player extends FlxSprite {
 
+    public var halo:FlxSprite; // the halo around the player for klicking
     public var isOverlapped = false;
 
     var _growthRate = 5;
@@ -15,10 +16,18 @@ class Player extends FlxSprite {
 
         super(x, y);
 
-        this.loadGraphic(AssetPaths.player__png, false, 32, 32);
+        this.loadGraphic('assets/images/player.png', true, 32, 32);
         this.immovable = true;
+        this.antialiasing = true;
+
         this.animation.add('normal', [0, 1, 2, 3], 15);
         this.animation.add('active', [4, 5, 6, 7], 15);
+
+        this.halo = new FlxSprite();
+        this.halo.loadGraphic('assets/images/player_halo.png', false, 96, 96);
+        this.halo.immovable = true;
+        this.halo.antialiasing = true;
+        this.halo.screenCenter();
 
     }
 
@@ -40,7 +49,7 @@ class Player extends FlxSprite {
 
     public function checkOverlap(enemy:BallEnemy):Void {
     
-        if (FlxG.overlap(enemy, this)) {
+        if (FlxG.overlap(enemy, this.halo)) {
         
             if (!this.isOverlapped) {
 

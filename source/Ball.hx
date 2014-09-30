@@ -11,7 +11,7 @@ class Ball extends FlxSprite {
 
         super(x, y);
 
-        this.loadGraphic(AssetPaths.balls__png, true, 32, 32);
+        this.loadGraphic('assets/images/balls.png', true, 32, 32);
 
         this.elasticity = 1;
         this.velocity.set(this.speed, this.speed);

@@ -37,6 +37,7 @@ class PlayState extends FlxState {
 
         this.add(this._walls);
         this.add(this._player);
+        this.add(this._player.halo);
         this.add(this._enemy);
 
     }
@@ -52,6 +53,7 @@ class PlayState extends FlxState {
         super.update();
 
         FlxG.collide(this._enemy, this._walls);
+        FlxG.collide(this._enemy, this._player);
         this._player.checkOverlap(this._enemy);
 
     }
