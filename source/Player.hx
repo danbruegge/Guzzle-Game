@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.plugin.MouseEventManager;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -29,6 +30,8 @@ class Player extends FlxSprite {
         this.halo.antialiasing = true;
         this.halo.screenCenter();
 
+        MouseEventManager.add(this.halo, null, this.onUp);
+
     }
 
     override public function update():Void {
@@ -47,39 +50,39 @@ class Player extends FlxSprite {
 
     }
 
-    public function checkOverlap(enemy:BallEnemy):Void {
-    
-        if (FlxG.overlap(enemy, this.halo)) {
-        
-            if (!this.isOverlapped) {
+    // public function checkOverlap(enemies:Enemies):Void {
+    // 
+    //     if (FlxG.overlap(enemies, this.halo, this.overlaps)) {
+    //     
+    //         if (!this.isOverlapped) {
 
-                this.isOverlapped = true;
+    //             this.isOverlapped = true;
 
-            }
+    //         }
 
-        } else {
+    //     } else {
 
-            this.isOverlapped = false;
+    //         this.isOverlapped = false;
 
-        }
+    //     }
 
-        if (FlxG.mouse.justReleased) {
+    //     if (FlxG.mouse.justReleased) {
 
-            if (this.isOverlapped) {
+    //         if (this.isOverlapped) {
 
-                this.onOverlapClick();
-                enemy.onOverlapClick();
+    //             this.onOverlapClick();
+    //             enemies.callAll('onOverlapClick');
 
-            } else {
+    //         } else {
 
-                this.noOverlapClick();
-                enemy.noOverlapClick();
+    //             this.noOverlapClick();
+    //             enemies.callAll('noOverlapClick');
 
-            }
+    //         }
 
-        }
+    //     }
 
-    }
+    // }
 
     public function onOverlapClick():Void {
     
@@ -106,6 +109,23 @@ class Player extends FlxSprite {
         this.updateHitbox();
         this.screenCenter();
 
+    }
+
+    public function haloOverlaps(enemy:BallEnemy, halo:Player):Void {
+    
+        if (!this.isOverlapped) {
+
+            this.isOverlapped = true;
+
+        }
+
+        if (FlxG.mouse.justReleased) {
+
+            this.onOverlapClick();
+            enemy.onOverlapClick();
+
+        }
+    
     }
 
 }
